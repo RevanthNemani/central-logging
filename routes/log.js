@@ -11,10 +11,10 @@ const router = express.Router();
 
 const logController = require('../controllers/log');
 
-// POST logs
+// POST log request
 router.post('/logs', logController.postLog);
 
-//PATCH
+// PATCH log response
 router.patch('/logs', logController.patchLog);
 
 // GET one log

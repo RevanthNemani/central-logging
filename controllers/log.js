@@ -17,7 +17,7 @@ exports.postLog = (req, res, next) => {
   });
   log
     .save()
-    .then(() => res.status(201).json({ success: 1 }))
+    .then(() => res.status(201).json(request))
     .catch((err) => {
       if (err.code == 11000) {
         res.status(400).json({
@@ -51,7 +51,7 @@ exports.patchLog = (req, res, next) => {
       throw new Error(`response already exists, can't overwrite a response`);
     })
     .then(() => {
-      res.status(201).json({ success: 1 });
+      res.status(201).json(response);
     })
     .catch((err) => {
       res.status(400).json({ success: 0, reason: err.message });
