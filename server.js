@@ -6,7 +6,6 @@
  */
 
 // * Importing packages
-const path = require('path');
 const express = require('express');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
@@ -53,10 +52,6 @@ if (process.env.NODE_ENV === 'production') {
   DB_PORT = process.env.PROD_DB_PORT;
 }
 
-// * Importing database config
-
-// * Importing models
-
 // * Importing routers
 const logRoute = require('./routes/log');
 
@@ -99,12 +94,15 @@ app.use(errorController.get404);
 
 // * Initialize mongoose and start service
 mongoose
-  .connect(`mongodb://${DB_USERNAME}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}`, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    poolSize: 30,
-    dbName: DB_DATABASE,
-  })
+  .connect(
+    `mongodb://${DB_USERNAME}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/?authSource=${DB_DATABASE}&readPreference=primary&appname=MongoDB%20Compass&ssl=false`,
+    {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      poolSize: 30,
+      dbName: DB_DATABASE,
+    }
+  )
   .then(() => {
     app.listen(PORT, () => {
       console.log(`server listening on http://${HOST}:${PORT}`);
