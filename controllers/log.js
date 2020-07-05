@@ -7,29 +7,64 @@
 
 const Log = require('../models/log');
 
+// POST create logs with request and id
 exports.postLog = (req, res, next) => {
   const request = req.body;
-  const log = new Log({ _id: request.auth.uuid, request: request });
+  const log = new Log({
+    _id: request.auth.uuid,
+    request: request,
+    response: null,
+  });
   log
     .save()
     .then(() => res.status(201).json({ success: 1 }))
     .catch((err) => {
-      console.log(err);
-      res.status(400).json({ success: 0, reason: err });
+      if (err.code == 11000) {
+        res.status(400).json({
+          success: 0,
+          reason: {
+            errorCode: '7',
+            errorDesc: 'DuplicatedGUID',
+          },
+        });
+      } else {
+        res.status(400).json({
+          success: 0,
+          reason: {
+            errorCode: '128',
+            errorDesc: 'NoGUID or other errors',
+          },
+        });
+      }
     });
 };
 
+// PATCH update logs with the response for the same request using the same id
 exports.patchLog = (req, res, next) => {
   const response = req.body;
-  Log.findById({ _id: response.auth.uuid })
+  Log.findById(response.auth.uuid)
     .then((log) => {
-      log.response = response;
-      return log.save();
+      if (log.response == null) {
+        log.response = response;
+        return log.save();
+      }
+      throw new Error(`response already exists, can't overwrite a response`);
     })
     .then(() => {
       res.status(201).json({ success: 1 });
     })
     .catch((err) => {
-      res.status(400).json({ success: 0, reason: err });
+      res.status(400).json({ success: 0, reason: err.message });
+    });
+};
+
+// GET particular log using _id
+exports.getLog = (req, res, next) => {
+  Log.findById(req.params.logId)
+    .then((log) => {
+      res.status(200).json(log);
+    })
+    .catch((err) => {
+      res.status(404).json({ error: 'notFound' });
     });
 };

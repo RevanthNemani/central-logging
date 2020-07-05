@@ -17,4 +17,7 @@ router.post('/logs', logController.postLog);
 //PATCH
 router.patch('/logs', logController.patchLog);
 
+// GET one log
+router.get('/logs/:logId', logController.getLog);
+
 module.exports = router;
