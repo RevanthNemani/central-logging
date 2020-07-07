@@ -21,6 +21,7 @@ let HOST;
 let PORT;
 let DB_USERNAME;
 let DB_PASSWORD;
+let DB_DATABASE_AUTH;
 let DB_DATABASE;
 let DB_HOST;
 let DB_PORT;
@@ -29,6 +30,7 @@ if (process.env.NODE_ENV === 'development') {
   PORT = process.env.DEV_APP_PORT;
   DB_USERNAME = process.env.DEV_DB_USERNAME;
   DB_PASSWORD = process.env.DEV_DB_PASSWORD;
+  DB_DATABASE_AUTH = process.env.DEV_DB_DATABASE_AUTH;
   DB_DATABASE = process.env.DEV_DB_DATABASE;
   DB_HOST = process.env.DEV_DB_HOST;
   DB_PORT = process.env.DEV_DB_PORT;
@@ -38,6 +40,7 @@ if (process.env.NODE_ENV === 'test') {
   PORT = process.env.TEST_APP_PORT;
   DB_USERNAME = process.env.TEST_DB_USERNAME;
   DB_PASSWORD = process.env.TEST_DB_PASSWORD;
+  DB_DATABASE_AUTH = process.env.TEST_DB_DATABASE_AUTH;
   DB_DATABASE = process.env.TEST_DB_DATABASE;
   DB_HOST = process.env.TEST_DB_HOST;
   DB_PORT = process.env.TEST_DB_PORT;
@@ -47,6 +50,7 @@ if (process.env.NODE_ENV === 'production') {
   PORT = process.env.PROD_APP_PORT;
   DB_USERNAME = process.env.PROD_DB_USERNAME;
   DB_PASSWORD = process.env.PROD_DB_PASSWORD;
+  DB_DATABASE_AUTH = process.env.PROD_DB_DATABASE_AUTH;
   DB_DATABASE = process.env.PROD_DB_DATABASE;
   DB_HOST = process.env.PROD_DB_HOST;
   DB_PORT = process.env.PROD_DB_PORT;
@@ -95,7 +99,7 @@ app.use(errorController.get404);
 // * Initialize mongoose and start service
 mongoose
   .connect(
-    `mongodb://${DB_USERNAME}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/?authSource=${DB_DATABASE}&readPreference=primary&appname=MongoDB%20Compass&ssl=false`,
+    `mongodb://${DB_USERNAME}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/?authSource=${DB_DATABASE_AUTH}&readPreference=primary&ssl=false`,
     {
       useNewUrlParser: true,
       useUnifiedTopology: true,

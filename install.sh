@@ -1,6 +1,6 @@
 
 # cd /home/node/
-# wget -O central-logging.tar.gz 'https://github.com/RevanthNemani/central-logging/archive/v0.8.0.tar.gz'
+# wget -O central-logging.tar.gz 'https://github.com/RevanthNemani/central-logging/archive/v0.9.0.tar.gz'
 # tar -xzf central-logging.tar.gz
 
 sudo echo '
@@ -23,6 +23,7 @@ NODE_ENV=production
 # Development Database setup
 DEV_DB_USERNAME=alizz-logs
 DEV_DB_PASSWORD=Alizz2020
+DEV_DB_DATABASE_AUTH=admin
 DEV_DB_DATABASE=central_logs
 DEV_DB_HOST=10.10.150.71
 DEV_DB_PORT=27017
@@ -41,6 +42,7 @@ DEV_SECRET_KEY=
 # Test Database setup
 TEST_DB_USERNAME=alizz-logs
 TEST_DB_PASSWORD=Alizz2020
+TEST_DB_DATABASE_AUTH=central_logs
 TEST_DB_DATABASE=central_logs
 TEST_DB_HOST=10.10.150.71
 TEST_DB_PORT=27017
@@ -59,6 +61,7 @@ TEST_SECRET_KEY=
 # Production Database setup
 PROD_DB_USERNAME=alizz-logs
 PROD_DB_PASSWORD=Alizz2020
+PROD_DB_DATABASE_AUTH=central_logs
 PROD_DB_DATABASE=central_logs
 PROD_DB_HOST=10.10.150.71
 PROD_DB_PORT=27017
@@ -87,7 +90,7 @@ Documentation=https://gitlab.com/it/node/central-logging
 After=network.target
 
 [Service]
-WorkingDirectory=/home/node/central-logging-0.8.0
+WorkingDirectory=/home/node/central-logging-0.9.0
 User=node
 ExecStart=/usr/bin/node server.js
 StandardOutput=syslog
@@ -100,6 +103,8 @@ WantedBy=multi-user.target
 ' > /lib/systemd/system/central-logging.service
 
 sudo systemctl daemon-reload
+
+sudo systemctl enable central-logging
 
 sudo systemctl start central-logging
 
