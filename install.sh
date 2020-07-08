@@ -14,9 +14,6 @@ sudo echo '
 #
 # Node environment variable. Options: [development | test | production]
 NODE_ENV=production
-# Enable it only when needed. Not advisable in production scenario.
-# WARNING: This will recreate all tables. You will lose your data.
-#RECREATE_DB=1
 #
 # Development Environment Variables
 #
@@ -80,6 +77,8 @@ PROD_SECRET_KEY=
 cd ./
 
 npm install
+
+npm prune
 
 /usr/bin/node
 
