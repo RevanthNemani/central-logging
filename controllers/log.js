@@ -2,7 +2,7 @@
  * Project: central-logging
  * Description: Central logging system for all requests to alizz islamic bank middleware.
  * Copyright (C) 2020 alizz islamic Bank. All Rights Reserved.
- * Author: Revanth Nemani <revanth.nemani@alizzislamic.com>
+ * Author: Revanth Nemani <revanth.nemani@alizzislamic.com> Saqer AlBadi <saqer.albadi@alizzislamic.com>
  */
 
 const Log = require('../models/log');
@@ -57,6 +57,23 @@ exports.patchLog = (req, res, next) => {
       res.status(400).json({ success: 0, reason: err.message });
     });
 };
+
+// PATCH update logs with middleware responses for the same request using the same id
+exports.patchMiddlewareLog = (req, res, next) => {
+  const middlewareReqRes = req.body;
+  Log.findByIdAndUpdate(middlewareReqRes.auth.uuid, {
+    $push: {
+      middleware: middlewareReqRes
+    }
+  })
+    .then(() => {
+      res.status(201).json(middlewareReqRes);
+    })
+    .catch((err) => {
+      res.status(400).json({ success: 0, reason: err.message });
+    });
+};
+
 
 // GET particular log using _id
 exports.getLog = (req, res, next) => {
