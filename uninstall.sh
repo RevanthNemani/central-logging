@@ -5,7 +5,7 @@ Documentation=https://gitlab.com/it/node/central-logging
 After=network.target
 
 [Service]
-WorkingDirectory=/home/node/central-logging-0.9.0
+WorkingDirectory=/home/node/central-logging-1.0.0
 User=node
 ExecStart=/usr/bin/node server.js
 StandardOutput=syslog
