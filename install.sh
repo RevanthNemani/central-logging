@@ -1,6 +1,5 @@
-
 # cd /home/node/
-# wget -O central-logging.tar.gz 'https://github.com/RevanthNemani/central-logging/archive/v0.9.0.tar.gz'
+# wget -O central-logging.tar.gz 'https://github.com/RevanthNemani/central-logging/archive/v1.0.0.tar.gz'
 # tar -xzf central-logging.tar.gz
 
 sudo echo '
@@ -39,6 +38,7 @@ DEV_SECRET_KEY=
 # Test Database setup
 TEST_DB_USERNAME=alizz-logs
 TEST_DB_PASSWORD=Alizz2020
+TEST_DB_DATABASE_AUTH=admin
 TEST_DB_DATABASE_AUTH=central_logs
 TEST_DB_DATABASE=central_logs
 TEST_DB_HOST=10.10.150.71
@@ -58,6 +58,7 @@ TEST_SECRET_KEY=
 # Production Database setup
 PROD_DB_USERNAME=alizz-logs
 PROD_DB_PASSWORD=Alizz2020
+PROD_DB_DATABASE_AUTH=admin
 PROD_DB_DATABASE_AUTH=central_logs
 PROD_DB_DATABASE=central_logs
 PROD_DB_HOST=10.10.150.71
@@ -85,11 +86,11 @@ npm prune
 sudo echo '
 [Unit]
 Description=Central logging system for all requests to alizz islamic bank middleware.
-Documentation=https://gitlab.com/it/node/central-logging
+Documentation=https://10.10.103.3:8080/it/node/central-logging
 After=network.target
 
 [Service]
-WorkingDirectory=/home/node/central-logging-0.9.0
+WorkingDirectory=/home/node/central-logging-1.0.0
 User=node
 ExecStart=/usr/bin/node server.js
 StandardOutput=syslog
