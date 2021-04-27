@@ -34,7 +34,7 @@ Get the package
 ```{sh}
 cd /home/node/
 
-wget -O central-logging.tar.gz 'http://10.10.103.3:8080/it/node/central-logging/-/archive/v0.9.0/cental-logging-v0.9.0.tar.gz'
+wget -O central-logging.tar.gz 'http://10.10.103.3:8080/it/node/central-logging/-/archive/v1.0.0/cental-logging-v1.0.0.tar.gz'
 
 tar -xzf central-logging.tar.gz
 ```
@@ -44,12 +44,12 @@ Go into the newly extracted package and run the install script.
 *Edit the install script to suite your requirement.*
 
 ```{sh}
-cd /cental-logging-v0.9.0
+cd /cental-logging-v1.0.0
 
 sh install.sh
 ```
 
-<CENTRAL_LOGGING_HOME> is reference to the install location. In this case `/home/node/central-logging-v0.9.0`
+<CENTRAL_LOGGING_HOME> is reference to the install location. In this case `/home/node/central-logging-v1.0.0`
 
 ### Uninstall
 
