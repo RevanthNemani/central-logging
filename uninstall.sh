@@ -29,4 +29,4 @@ sudo rm /lib/systemd/system/central-logging.service
 
 cd ..
 
-sudo rm -rf ./central-logging-1.0.0
+sudo rm -rf ./central-logging-1.0.2
