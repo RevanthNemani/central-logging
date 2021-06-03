@@ -87,7 +87,7 @@ Documentation=https://10.10.103.3:8080/it/node/central-logging
 After=network.target
 
 [Service]
-WorkingDirectory=/home/node/central-logging-1.0.0
+WorkingDirectory=/home/node/central-logging-1.0.1
 User=node
 ExecStart=/usr/bin/node server.js
 StandardOutput=syslog
