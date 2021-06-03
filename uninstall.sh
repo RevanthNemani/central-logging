@@ -27,4 +27,6 @@ sudo systemctl stop central-logging
 
 sudo rm /lib/systemd/system/central-logging.service
 
-sudo rm -rf .
+cd ..
+
+sudo rm -rf ./central-logging-1.0.0
